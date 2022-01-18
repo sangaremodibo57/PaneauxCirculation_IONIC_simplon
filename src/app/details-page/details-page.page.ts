@@ -1,39 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PopoverController } from '@ionic/angular';
+import { NavController, PopoverController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { PopupPage } from '../popup/popup.page';
 import { ServicesService } from '../services.service';
 
 @Component({
-  selector: 'app-detail-panneaux2',
-  templateUrl: './detail-panneaux2.page.html',
-  styleUrls: ['./detail-panneaux2.page.scss'],
+  selector: 'app-details-page',
+  templateUrl: './details-page.page.html',
+  styleUrls: ['./details-page.page.scss'],
 })
-export class DetailPanneaux2Page implements OnInit {
+export class DetailsPagePage implements OnInit {
+
   public listePanneauxParCategorie: any;
   public panneau: any;
   public panneaux = environment.panneaux;
+
   public slideOpts = {
-    slidesPerView:1.2,
-    loop: true,
-    spaceBetween:50,
-    initialSlide:1,
-    centerdSlide:true,
+    slidesPerView: 3,
     coverflowEffect: {
-      rotate:0,
-      stretch:0,
-      depth:1000,
-      modifier:1,
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
       slideShadows: true,
     },
     on: {
       beforeInit() {
         const swiper = this;
-  
+
         swiper.classNames.push(`${swiper.params.containerModifierClass}coverflow`);
         swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
-  
+
         swiper.params.watchSlidesProgress = true;
         swiper.originalParams.watchSlidesProgress = true;
       },
@@ -54,24 +52,24 @@ export class DetailPanneaux2Page implements OnInit {
           const slideSize = slidesSizesGrid[i];
           const slideOffset = $slideEl[0].swiperSlideOffset;
           const offsetMultiplier = ((center - slideOffset - (slideSize / 2)) / slideSize) * params.modifier;
-  
+
            let rotateY = isHorizontal ? rotate * offsetMultiplier : 0;
           let rotateX = isHorizontal ? 0 : rotate * offsetMultiplier;
           // var rotateZ = 0
           let translateZ = -translate * Math.abs(offsetMultiplier);
-  
+
            let translateY = isHorizontal ? 0 : params.stretch * (offsetMultiplier);
           let translateX = isHorizontal ? params.stretch * (offsetMultiplier) : 0;
-  
+
            // Fix for ultra small values
           if (Math.abs(translateX) < 0.001) translateX = 0;
           if (Math.abs(translateY) < 0.001) translateY = 0;
           if (Math.abs(translateZ) < 0.001) translateZ = 0;
           if (Math.abs(rotateY) < 0.001) rotateY = 0;
           if (Math.abs(rotateX) < 0.001) rotateX = 0;
-  
-           const slideTransform = `translate3d(${translateX}px,${translateY}px,${translateZ}px)  rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  
+
+          const slideTransform = `translate3d(${translateX}px,${translateY}px,${translateZ}px)  rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
            $slideEl.transform(slideTransform);
           $slideEl[0].style.zIndex = -Math.abs(Math.round(offsetMultiplier)) + 1;
           if (params.slideShadows) {
@@ -90,7 +88,6 @@ export class DetailPanneaux2Page implements OnInit {
             if ($shadowAfterEl.length) $shadowAfterEl[0].style.opacity = (-offsetMultiplier) > 0 ? -offsetMultiplier : 0;
           }
         }
-  
          // Set correct perspective for IE10
         if (swiper.support.pointerEvents || swiper.support.prefixedPointerEvents) {
           const ws = $wrapperEl[0].style;
@@ -105,39 +102,41 @@ export class DetailPanneaux2Page implements OnInit {
           .transition(duration);
       }
     }
-  }
+  };
+
   constructor(
     public service: ServicesService,
     public router: Router,
     public popover: PopoverController,
-  ) { }
+    public navCtrl: NavController
+  ) {}
 
   ngOnInit() {
     this.panneau = this.service.getPanneau();
-    this.listePanneauxParCategorie = this.service.getPanneau().sousEnsemble;
-    console.log("Panneaux 2: ", this.listePanneauxParCategorie);
-    // console.log("Les panneaux--------"+ this.service.getPanneau())
+    this.listePanneauxParCategorie = this.panneau.sousEnsemble;
   }
+
   async showConfirm(data: any) {
-    console.log("dat"+data);
-    
-    this.service.setByPanneauPopup(null);
     this.service.setByPanneauPopup(data);
     const popover = await this.popover.create({
       component: PopupPage,
-      cssClass:'my-custum-class',
+      cssClass: 'my-custum-class',
       event: data,
       translucent: true
     });
     await popover.present();
-
-    const{role} = await popover.onDidDismiss();
-    console.log('Fermer !', role);
+    const { role } = await popover.onDidDismiss();
+    this.toBeShown(data);
   }
 
-  detailPanneau(data: any){
+  detailPanneau(data: any) {
     this.service.setPanneau(data);
-    this.service.getPanneau();
+  }
+
+  public toBeShown(data: any) {
+    this.panneau = data;
+    this.listePanneauxParCategorie = this.panneau.sousEnsemble;
+    console.log('To be shown -> ', this.panneau);
   }
 
 }

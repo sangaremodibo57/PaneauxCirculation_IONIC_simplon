@@ -26,7 +26,6 @@ export class Tab2Page {
   ) {}
 
   async showConfirm(data: any) {
-    console.log('Data', data);
     this.service.setByPanneauPopup(data);
     const popover = await this.popover.create({
       component: PopupPage,
@@ -36,7 +35,8 @@ export class Tab2Page {
     });
     await popover.present();
 
-    const{role} = await popover.onDidDismiss();
-    console.log('Fermer !', role);
+    const role = await popover.onDidDismiss();
+    console.log(popover);
+    // this.router.navigateByUrl('/detail-panneaux');
   }
 }

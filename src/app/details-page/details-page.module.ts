@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Popup2PageRoutingModule } from './popup2-routing.module';
+import { DetailsPagePageRoutingModule } from './details-page-routing.module';
 
-import { Popup2Page } from './popup2.page';
+import { DetailsPagePage } from './details-page.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    Popup2PageRoutingModule
+    DetailsPagePageRoutingModule
   ],
-  declarations: [Popup2Page]
+  declarations: [DetailsPagePage]
 })
-export class Popup2PageModule {}
+export class DetailsPagePageModule {}

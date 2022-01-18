@@ -11,25 +11,18 @@ const routes: Routes = [
     loadChildren: () => import('./popup/popup.module').then( m => m.PopupPageModule)
   },
   {
-    path: 'detail-panneaux',
-    loadChildren: () => import('./detail-panneaux/detail-panneaux.module').then( m => m.DetailPanneauxPageModule)
-  },
-  {
-    path: 'detail-panneaux2',
-    loadChildren: () => import('./detail-panneaux2/detail-panneaux2.module').then( m => m.DetailPanneaux2PageModule)
-  },
-  {
-    path: 'popup2',
-    loadChildren: () => import('./popup2/popup2.module').then( m => m.Popup2PageModule)
-  },
-  {
     path: 'popover',
     loadChildren: () => import('./popover/popover.module').then( m => m.PopoverPageModule)
   },
   {
     path: '',
     loadChildren: () => import('./accueil/accueil.module').then( m => m.AccueilPageModule)
+  },
+  {
+    path: 'details-page',
+    loadChildren: () => import('./details-page/details-page.module').then( m => m.DetailsPagePageModule)
   }
+
 ];
 @NgModule({
   imports: [

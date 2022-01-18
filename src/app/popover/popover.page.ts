@@ -9,11 +9,11 @@ import { ServicesService } from '../services.service';
 export class PopoverPage implements OnInit {
   public valide ;
   constructor(
-    public Myserv:ServicesService
+    public mService: ServicesService
   ) { }
 
   ngOnInit() {
-    this.valide=this.Myserv.valid
+    this.valide=this.mService.valid;
   }
 
 }
