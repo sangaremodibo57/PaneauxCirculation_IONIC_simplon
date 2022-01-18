@@ -114,14 +114,13 @@ export class DetailPanneaux2Page implements OnInit {
 
   ngOnInit() {
     this.panneau = this.service.getPanneau();
-    this.listePanneauxParCategorie = this.service.getPanneau().sousEnsemble;
+    this.listePanneauxParCategorie = this.panneau.sousEnsemble;
     console.log("Panneaux 2: ", this.listePanneauxParCategorie);
-    // console.log("Les panneaux--------"+ this.service.getPanneau())
   }
+
   async showConfirm(data: any) {
     console.log("dat"+data);
-    
-    this.service.setByPanneauPopup(null);
+    //this.service.setByPanneauPopup(null);
     this.service.setByPanneauPopup(data);
     const popover = await this.popover.create({
       component: PopupPage,

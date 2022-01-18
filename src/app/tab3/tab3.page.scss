@@ -1,23 +1,21 @@
 * {
     --background: linear-gradient(#ffffff, #F9A732);
   }
-  .img-logo {
-   
+
+  #h{
+    font-size: 15px;
   }
-  .h5 {
-   
-  }
-  
   .titre{
    display: flex;
    flex-direction: column;
    padding: auto;
   }
+
   
   audio {
     width: 200px;
     height: 40px;
-    margin: 0 ;
+    margin: 0 auto 10px;
   }
   ion-col img{
       width: 20%;

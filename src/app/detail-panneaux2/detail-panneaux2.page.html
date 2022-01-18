@@ -1,7 +1,7 @@
 <ion-content class="ion-text-center">
   <h3><b>{{panneau.libelle}}</b></h3>
   <ion-slides  [options]='slideOpts'>
-    <ion-slide *ngFor="let sous of listePanneauxParCategorie; let index = index">
+    <ion-slide *ngFor="let sous of listePanneauxParCategorie">
       <div class="contenair">
         <img src="{{sous.image}}" alt="" >
         <h3>{{sous.nom}}</h3>
@@ -22,8 +22,8 @@
         </div>
         <div *ngIf="panneaux.libelle !== panneau.libelle">
           <a (click)="showConfirm(panneaux)">
-          <ion-img class="taille-image" src="{{ panneaux.image }}" disabled="disabled"></ion-img>
-          <ion-label style="color: white; font-size: small;">{{panneaux.libelle}}</ion-label>
+            <ion-img class="taille-image" src="{{ panneaux.image }}" disabled="disabled"></ion-img>
+            <ion-label style="color: white; font-size: small;">{{panneaux.libelle}}</ion-label>
           </a>
         </div>
       </ion-col>

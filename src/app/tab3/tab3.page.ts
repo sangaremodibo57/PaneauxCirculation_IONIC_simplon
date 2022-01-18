@@ -34,8 +34,12 @@ export class Tab3Page implements OnInit {
       const card = document.createElement('ion-col');
       card.setAttribute('size', '6');
       card.classList.add('card');
+      //card.setAttribute('display',"flex");
+      //card.setAttribute('display',"flex");
       const image = document.createElement('img');
       image.classList.add('image');
+      image.setAttribute("height", "70px");
+      image.setAttribute("width", "70px");
       image.setAttribute('src', choice.image);
       image.addEventListener('click', () => {
         this.onAnswer(choice.answer);

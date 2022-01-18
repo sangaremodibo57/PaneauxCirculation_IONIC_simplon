@@ -25,7 +25,7 @@ export class Popup2Page implements OnInit {
     console.log("detail Data ", data);
     await this.popoverC.dismiss();
     this.service.setPanneau(data);  
-    this.router.navigate(['detail-panneaux2']);
+    this.router.navigateByUrl('detail-panneaux2');
   }
 
   async retour(){
